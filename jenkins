@@ -1,0 +1,31 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('checkout the code from GitHub Repository') {
+            steps {
+            git url:'https://github.com/belief2507/kits-mavenrepo25.git'
+            }
+        }
+        stage("code compile"){
+            steps{
+                sh "mvn compile"
+            }
+        }
+        stage("code Testing"){
+            steps{
+                sh "mvn test"
+            }
+        }
+        stage("QA reports"){
+            steps{
+                sh "mvn pmd:pmd"
+            }
+        }
+        stage("code package"){
+            steps{
+                sh "mvn package"
+            }
+        }
+    }
+}
